@@ -49,6 +49,24 @@ public class AddressBook extends ContactDetails{
         }
     }
 
+    public void deleteContact(){
+        System.out.println("Enter the first name of person to delete contact");
+        String deleteName = scanner.next();
+        boolean deleted=false;
+        for(int i = 0; i < contactDetails.size(); i++) {
+            String name = contactDetails.get(i).getFirstName();
+            if (name.equalsIgnoreCase(deleteName)) {
+                contactDetails.remove(i);
+                printContact();
+                deleted=true;
+                break;
+            }
+        }
+        if(!deleted){
+            System.out.println("This name does not exist");
+        }
+    }
+
     public void printContact() {
         System.out.println("Contact Details");
         for (int i = 0; i < contactDetails.size(); i++) {
