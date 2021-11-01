@@ -50,7 +50,7 @@ public class AddressBook extends ContactDetails{
     }
 
     public void deleteContact(){
-        System.out.println("Enter the first name of person to delete contact");
+        System.out.println("Enter the first name of person to edit contact");
         String deleteName = scanner.next();
         boolean deleted=false;
         for(int i = 0; i < contactDetails.size(); i++) {
@@ -79,4 +79,5 @@ public class AddressBook extends ContactDetails{
                     + "EmailId      : " + contactDetails.get(i).getEmailId()   + "\n");
         }
     }
+
 }
