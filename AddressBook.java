@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AddressBook extends ContactDetails{
-    List<ContactDetails> contactDetails = new ArrayList<>();
-    ContactDetails person = new ContactDetails();
-    Scanner scanner = new Scanner(System.in);
-    public void addNewContact() {
+public class AddressBook {
 
+    ContactDetails person = new ContactDetails();
+    List<ContactDetails> contactDetailsList = new ArrayList<>();
+    public void addContact() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of contacts you want to enter");
+        int number = scanner.nextInt();
+        for (int i = 0; i < number; i++) {
+            System.out.println("Enter the contact details of person ");
+            writeContact();
+        }
+    }
+    public void writeContact() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
         String firstName = scanner.next();
         System.out.println("Enter Last Name : ");
@@ -27,57 +36,44 @@ public class AddressBook extends ContactDetails{
         System.out.println("Enter EmailId : ");
         String emailId = scanner.next();
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
-        contactDetails.add(person);
-        printContact();
+        contactDetailsList.add(person);
     }
 
     public void editContact() {
         System.out.println("Enter the first name of person to edit contact");
+        Scanner scanner = new Scanner(System.in);
         String editName = scanner.next();
-        boolean edited=false;
-        for(int i = 0; i < contactDetails.size(); i++) {
-            String name = contactDetails.get(i).getFirstName();
+        boolean edited = false;
+        for (int i = 0; i < contactDetailsList.size(); i++) {
+            String name = contactDetailsList.get(i).getFirstName();
             if (name.equalsIgnoreCase(editName)) {
-                contactDetails.remove(i);
-                addNewContact();
-                edited=true;
+                contactDetailsList.remove(person);
+                writeContact();
+                edited = true;
                 break;
             }
         }
-        if(!edited){
-            System.out.println("This name does not exist");
+        if (!edited) {
+            System.out.println("enter name is incorrect");
         }
     }
 
-    public void deleteContact(){
-        System.out.println("Enter the first name of person to edit contact");
+    public void deleteContact() {
+        System.out.println("Enter the first name of person to delete contact");
+        Scanner scanner = new Scanner(System.in);
         String deleteName = scanner.next();
-        boolean deleted=false;
-        for(int i = 0; i < contactDetails.size(); i++) {
-            String name = contactDetails.get(i).getFirstName();
+        int i = 0;
+        for ( ;i < contactDetailsList.size(); i++) {
+            String name = contactDetailsList.get(i).getFirstName();
             if (name.equalsIgnoreCase(deleteName)) {
-                contactDetails.remove(i);
-                printContact();
-                deleted=true;
                 break;
             }
         }
-        if(!deleted){
-            System.out.println("This name does not exist");
+        if (i < contactDetailsList.size()) {
+            contactDetailsList.remove(i);
+            System.out.println("Contact Deleted");
+        }else {
+            System.out.println("Contact not find");
         }
     }
-
-    public void printContact() {
-        System.out.println("Contact Details");
-        for (int i = 0; i < contactDetails.size(); i++) {
-            System.out.println("Name         : " + contactDetails.get(i).getFirstName()+ " " + contactDetails.get(i).getLastName() + "\n"
-                    + "Address      : " + contactDetails.get(i).getAddress()   + "\n"
-                    + "City         : " + contactDetails.get(i).getCity()      + "\n"
-                    + "State        : " + contactDetails.get(i).getState()     + "\n"
-                    + "ZipCode      : " + contactDetails.get(i).getZipCode()   + "\n"
-                    + "MobileNumber : " + contactDetails.get(i).getMobileNumber()  + "\n"
-                    + "EmailId      : " + contactDetails.get(i).getEmailId()   + "\n");
-        }
-    }
-
 }

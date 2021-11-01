@@ -3,31 +3,47 @@ package com.addressbook;
 import java.util.Scanner;
 
 public class AddressBookMain {
-    public static void main(String[] args) {
-        System.out.println("Welcome to Address Book Program");
-        Scanner userInput = new Scanner(System.in);
-        AddressBook addressBook = new AddressBook();
+
+    public void choose() {
+        MultipleAddressBooks obj = new MultipleAddressBooks();
         while (true) {
-            System.out.println("Enter 1 to add new contact \nEnter 2 to edit contact " +
-                    "\nEnter 3 to delete contact \nEnter 4 to Exit");
-            int getUserInput = userInput.nextInt();
-            switch (getUserInput) {
+            System.out.println("Enter \n 1. To add The new AddressBook\n 2. To add contact in AddressBook\n " +
+                    "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n " +
+                    "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 0. to exit");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            switch (choice) {
                 case 1:
-                    addressBook.addNewContact();
+                    obj.addAddressBook();
                     break;
                 case 2:
-                    addressBook.editContact();
+                    obj.addContact();
                     break;
                 case 3:
-                    addressBook.deleteContact();
+                    obj.editContactInBook();
                     break;
                 case 4:
+                    obj.deleteContactInBook();
+                    break;
+                case 5:
+                    obj.deleteAddressBook();
+                    break;
+                case 6:
+                    obj.printBook();
+                    break;
+                case 7:
+                    obj.printContactsInBook();
+                    break;
+                case 0:
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid user input");
-                    continue;
+                    System.out.println("Enter the wrong input");
             }
         }
+    }
+    public static void main(String[] args) {
+        AddressBookMain addressBookMain = new AddressBookMain();
+        addressBookMain.choose();
     }
 }

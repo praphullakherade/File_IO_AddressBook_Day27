@@ -1,31 +1,29 @@
 package com.addressbook;
 
 public class ContactDetails {
-    //variables
-    protected String firstName;
-    protected String lastName;
-    protected String address;
-    protected String city;
-    protected String state;
-    protected int zipCode;
-    protected long mobileNumber;
-    protected String emailId;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private int zipCode;
+    private long mobileNumber;
+    private String emailId;
 
-    //Constructor
-    public ContactDetails(){
+    public ContactDetails() {
 
     }
-    public ContactDetails(String firstName, String lastName, String address, String city,
-                          String state, int zipCode, long mobileNumber, String emailId){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.address=address;
-        this.city=city;
-        this.state=state;
-        this.zipCode=zipCode;
-        this.mobileNumber=mobileNumber;
-        this.emailId=emailId;
 
+    public ContactDetails(String firstName, String lastName, String address, String city,
+                          String state, int zipCode, long mobileNumber, String emailId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.mobileNumber = mobileNumber;
+        this.emailId = emailId;
     }
 
     public String getFirstName() {
@@ -76,12 +74,12 @@ public class ContactDetails {
         this.zipCode = zipCode;
     }
 
-    public long getMobileNumber() {
+    public long getMobileNo() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setMobileNo(long mobileNo) {
+        this.mobileNumber = mobileNo;
     }
 
     public String getEmailId() {
@@ -91,6 +89,7 @@ public class ContactDetails {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
     @Override
     public String toString() {
         return "ContactDetails{" +
