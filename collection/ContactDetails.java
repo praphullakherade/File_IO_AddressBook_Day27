@@ -1,121 +1,171 @@
 package collection;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ContactDetails {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private int zipCode;
-    private long mobileNumber;
-    private String emailId;
+    public static Scanner sc = new Scanner(System.in);
+    public ArrayList<AddressBook> contactList = new ArrayList<>();
 
-    public ContactDetails() {
+    // Add Contact Details to the AddressBook
+    public void addContactDetails() {
+        System.out.println("Enter the contact details:");
+        System.out.println("Enter First Name");
+        String firstName = sc.next();
+        System.out.println("Enter last Name");
+        String lastName = sc.next();
+        System.out.println("Enter Address ");
+        String address = sc.next();
+        System.out.println("Enter City ");
+        String city = sc.next();
+        System.out.println("Enter State ");
+        String state = sc.next();
+        System.out.println("Enter  Email ");
+        String email = sc.next();
+        System.out.println("Enter phone Number");
+        String phoneNumber = sc.next();
+        System.out.println("Enter Zip code");
+        String zip = sc.next();
+
+        AddressBook contactDetails = new AddressBook(firstName, lastName, address, city, state, email, phoneNumber,
+                zip);
+        contactList.add(contactDetails);
+        System.out.println(contactDetails);
 
     }
 
-    public ContactDetails(String firstName, String lastName, String address, String city,
-                          String state, int zipCode, long mobileNumber, String emailId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.mobileNumber = mobileNumber;
-        this.emailId = emailId;
+    // Edit Contact Detail By Firstname
+    public boolean editContactDetails(String Name) {
+        int flag = 0;
+        for (AddressBook contact : contactList) {
+            if (contact.getFirstName().equals(Name)) {
+
+                System.out.println("Select an option to edit\n" + "1] First Name\n" + "2] Last Name\n" + "3] Address\n"
+                        + "4] City\n" + "5] State\n" + "6] Email" + "7] phone Number\n" + "8] ZIP code\n");
+
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1: {
+                        System.out.println("Enter First Name: ");
+                        String firstName = sc.next();
+                        contact.setFirstName(firstName);
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Enter last name: ");
+                        String lastName = sc.next();
+                        contact.setLastName(lastName);
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Enter Address: ");
+                        String address = sc.next();
+                        contact.setAddress(address);
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Enter City: ");
+                        String city = sc.next();
+                        contact.setCity(city);
+                        break;
+                    }
+                    case 5: {
+                        System.out.println("Enter State: ");
+                        String state = sc.next();
+                        contact.setState(state);
+                        break;
+                    }
+                    case 6: {
+                        System.out.println("Enter Email: ");
+                        String email = sc.next();
+                        contact.setZip(email);
+                        break;
+                    }
+                    case 7: {
+                        System.out.println("Enter Phone Number:");
+                        String phoneNumber = sc.next();
+                        contact.setPhoneNumber(phoneNumber);
+                        break;
+                    }
+                    case 8: {
+                        System.out.println("Enter Zip Code: ");
+                        String zip = sc.next();
+                        contact.setZip(zip);
+                        break;
+                    }
+
+                }
+
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+            return true;
+        else
+            return false;
     }
 
-    public String getFirstName() {
-        return firstName;
+    // Display Contact Details
+    public boolean Display(String Name) {
+        int flag = 0;
+        for (AddressBook contact : contactList) {
+            if (contact.getFirstName().equals(Name)) {
+                System.out.println(contact);
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+            return true;
+        else
+            return false;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    // Delete Contact Details
+    public boolean deleteContact(String name) {
+        int flag = 0;
+        for (AddressBook contact : contactList) {
+            if (contact.getFirstName().equals(name)) {
+                contactList.remove(contact);
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+            return true;
+        else
+            return false;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
+    /**
+     * Check Duplicate Entry by
+     * using set if first name in the contactLits is same
+     */
+    public void checkDuplicate() {
+        Set<String> ContactSet = new HashSet<>();
+        Set<AddressBook> filterSet = contactList.stream().filter(n -> !ContactSet.add(n.getFirstName()))
+                .collect(Collectors.toSet());
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+        for (AddressBook contact : filterSet) {
+            System.out.println("The Duplicate Contact is: " + contact.getFirstName());
+        }
     }
+    // Get Person Name by State
+    public void getPersonNameByState(String State) {
+        List<AddressBook> list  = contactList.stream().filter(p ->p.getState().equals(State)).collect(Collectors.toList());
+        for(AddressBook contact: list){
+            System.out.println("First Name: "+contact.getFirstName());
+            System.out.println("Last Name: "+contact.getLastName());
+        }
 
-    public String getAddress() {
-        return address;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public long getMobileNo() {
-        return mobileNumber;
-    }
-
-    public void setMobileNo(long mobileNo) {
-        this.mobileNumber = mobileNo;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactDetails that = (ContactDetails) o;
-        return firstName.equals(that.firstName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName);
-    }
-
-    @Override
-    public String toString() {
-        return "ContactDetails{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zipCode=" + zipCode +
-                ", mobileNo=" + mobileNumber +
-                ", emailId='" + emailId + '\'' +
-                '}';
+    // Get Person Name by city
+    public void getPersonNameByCity(String cityName) {
+        List<AddressBook> list  = contactList.stream().filter(p ->p.getCity().equals(cityName)).collect(Collectors.toList());
+        for(AddressBook contact: list){
+            System.out.println("First Name: "+contact.getFirstName());
+            System.out.println("Last Name: "+contact.getLastName());
+        }
     }
 }
