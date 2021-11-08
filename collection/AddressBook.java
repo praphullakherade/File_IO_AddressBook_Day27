@@ -1,8 +1,5 @@
 package collection;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class AddressBook {
     // variable declartion
     private String firstName, lastName, address, city, state, email, zip, phoneNumber;

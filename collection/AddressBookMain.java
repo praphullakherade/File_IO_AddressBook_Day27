@@ -2,9 +2,7 @@ package collection;
 
 import java.util.Map;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class AddressBookMain {
     public static Scanner sc = new Scanner(System.in);
